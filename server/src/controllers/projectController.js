@@ -50,7 +50,16 @@ const getProjects = async (request, response) => {
     });
 
     if (!projects || projects.length === 0) {
-      return handleError(response, 404, 'Nenhum projeto encontrado');
+      return response.json({
+        status: 'Nenhum projeto encontrado',
+        message: 'Consulta realizada com sucesso',
+        data: [],
+        meta: {
+          totalProjects,
+          totalPages,
+          currentPage: 1,
+        },
+      });
     }
 
     return response.json({
